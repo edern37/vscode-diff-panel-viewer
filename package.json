@@ -1,0 +1,66 @@
+{
+	"name": "calico-colors",
+	"description": "Calico Colorss - A Webview View API Sample",
+	"version": "0.0.1",
+	"private": true,
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Microsoft/vscode-extension-samples"
+	},
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"extensionKind": [
+		"workspace"
+	],
+	"extensionDependencies": [
+		"vscode.git"
+	],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./out/extension.js",
+	"contributes": {
+		"views": {
+			"scm": [
+				{
+					"type": "webview",
+					"id": "calicoColors.colorsView",
+					"name": "Diff panel"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "calicoColors.hideLeftSide",
+				"category": "Diff panel",
+				"title": "Hide left side",
+				"icon": "$(clear-all)"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "calicoColors.hideLeftSide",
+					"group": "navigation"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint \"src/**/*.ts\"",
+		"watch": "tsc -w -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^18.11.18",
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^5.42.0",
+		"@typescript-eslint/parser": "^5.42.0",
+		"eslint": "^8.26.0",
+		"typescript": "^4.8.4"
+	}
+}
