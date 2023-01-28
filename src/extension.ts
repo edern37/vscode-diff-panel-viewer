@@ -12,14 +12,14 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.registerWebviewViewProvider(ColorsViewProvider.viewType, provider));
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('calicoColors.hideLeftSide', () => {
+		vscode.commands.registerCommand('diffViewerPanel.hideLeftSide', () => {
 			provider.hideLeftSide();
 		}));
 }
 
 class ColorsViewProvider implements vscode.WebviewViewProvider {
 
-	public static readonly viewType = 'calicoColors.colorsView';
+	public static readonly viewType = 'diffViewerPanel.diffView';
 
 	private _view?: vscode.WebviewView;
 	private console?: vscode.OutputChannel;
@@ -96,9 +96,11 @@ class ColorsViewProvider implements vscode.WebviewViewProvider {
 		if (!this._view) {
 			return;
 		}
-		let workspaceFolder = vscode.workspace.getWorkspaceFolder(uri)?.uri.fsPath;
-		workspaceFolder = workspaceFolder.substring(0, workspaceFolder.lastIndexOf('/')+1);
-		this._view.title = uri.path.replace(workspaceFolder, "");
+		let workspaceFolder = vscode.workspace.getWorkspaceFolder(uri)?.uri?.fsPath;
+		if (workspaceFolder) {
+			workspaceFolder = workspaceFolder.substring(0, workspaceFolder.lastIndexOf('/')+1);
+			this._view.title = uri.path.replace(workspaceFolder, "");
+		}
 		promise?.then(diff => {
 				// TODO gérer lignes avant après : git diff -U$(wc -l MYFILE)
 				// TODO Faire viewsContainers : https://code.visualstudio.com/api/references/contribution-points#contributes.viewsContainers avec liste fichier cliquables

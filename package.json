@@ -1,12 +1,16 @@
 {
-	"name": "calico-colors",
-	"description": "Calico Colorss - A Webview View API Sample",
+	"name": "vscode-diff-viewer-panel",
+	"description": "Visualize git diff files in VS Code source control panel",
 	"version": "0.0.1",
-	"private": true,
 	"license": "MIT",
+	"publisher": "edern37",
+	"homepage": "https://github.com/edern37/vscode-diff-panel-viewer",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
+		"url": "https://github.com/edern37/vscode-diff-panel-viewer"
+	},
+	"bugs": {
+	  "url": "https://github.com/edern37/vscode-diff-panel-viewer/issues"
 	},
 	"engines": {
 		"vscode": "^1.74.0"
@@ -20,6 +24,15 @@
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+	  "diff",
+	  "differences",
+	  "git",
+	  "viewer",
+	  "comparison",
+	  "panel",
+	  "fixed"
+	],
 	"activationEvents": [],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -27,14 +40,14 @@
 			"scm": [
 				{
 					"type": "webview",
-					"id": "calicoColors.colorsView",
+					"id": "diffViewerPanel.diffView",
 					"name": "Diff panel"
 				}
 			]
 		},
 		"commands": [
 			{
-				"command": "calicoColors.hideLeftSide",
+				"command": "diffViewerPanel.hideLeftSide",
 				"category": "Diff panel",
 				"title": "Hide left side",
 				"icon": "$(clear-all)"
@@ -43,7 +56,7 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "calicoColors.hideLeftSide",
+					"command": "diffViewerPanel.hideLeftSide",
 					"group": "navigation"
 				}
 			]

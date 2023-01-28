@@ -4,6 +4,20 @@
 
 View git diff in a panel next source control when file is clicked in source control (use [diff2html](https://github.com/rtfpessoa/diff2html)).
 
+## Demo
+
+### With left and right diff panel:
+
+<p align="center">
+  <img src="documentation/Screenshot_2.png" width="700">
+</p>
+
+### Without left diff panel:
+
+<p align="center">
+  <img src="documentation/Screenshot_1.png" width="700">
+</p>
+
 ## Features
 
 - Ctrl + click inside webview to open file in editor at given line.
