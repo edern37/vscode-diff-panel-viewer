@@ -10,14 +10,20 @@ View git diff in a panel next source control when file is clicked in source cont
 - Open/Close left part of diff
 - Autoclose diff file in editor when clicked in Source control
 
-## Running the extension
+## Running the extension in debug
 
 - Open this example in VS Code 1.49+
 - `npm install`
 - `npm run watch` or `npm run compile`
 - `F5` to start debugging
 
-In the explorer, expand the `Calico Colors` view.
+In the explorer, expand the `Source control repositories` view.
+
+## Package extension and install in vscode
+
+- npm install -g vsce
+- vsce package
+- Open extensions panel and choose `Install from VSIX...`
 
 ## Contribute
 
