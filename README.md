@@ -1,20 +1,16 @@
-# Calico Colors — Webview View API Sample
+# Vscode diff panel viewer
 
-Demonstrates VS Code's proposed [webview view API](https://github.com/microsoft/vscode/issues/46585). This includes:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- Contributing a webview based view to the explorer.
-- Posting messages from an extension to a webview view
-- Posting message from a webview to an extension  
-- Persisting state in the view.
-- Contributing commands to the view title.
+View git diff in a panel next source control when file is clicked in source control (use [diff2html](https://github.com/rtfpessoa/diff2html)).
 
-## VS Code API
+## Features
 
-### `vscode` module
+- Ctrl + click inside webview to open file in editor at given line.
+- Open/Close left part of diff
+- Autoclose diff file in editor when clicked in Source control
 
-- [`window.registerWebviewViewProvider`](https://code.visualstudio.com/api/references/vscode-api#window.registerWebviewViewProvider)
-
-## Running the example
+## Running the extension
 
 - Open this example in VS Code 1.49+
 - `npm install`
@@ -22,3 +18,13 @@ Demonstrates VS Code's proposed [webview view API](https://github.com/microsoft/
 - `F5` to start debugging
 
 In the explorer, expand the `Calico Colors` view.
+
+## Contribute
+
+All contributions are welcome, so don't hesitate to submit a pull request. ;-)
+
+## License
+
+This code is released under MIT License.
+
+Check [LICENSE](LICENSE) file for more information.
