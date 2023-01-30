@@ -1,7 +1,7 @@
 {
 	"name": "vscode-diff-viewer-panel",
 	"description": "Visualize git diff files in VS Code source control panel",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"license": "MIT",
 	"publisher": "edern37",
 	"homepage": "https://github.com/edern37/vscode-diff-panel-viewer",
