@@ -15,6 +15,16 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('diffViewerPanel.hideLeftSide', () => {
 			provider.hideLeftSide();
 		}));
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('diffViewerPanel.expandAll', () => {
+			provider.expandAll();
+		}));
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('diffViewerPanel.collapseAll', () => {
+			provider.collapseAll();
+		}));
 }
 
 class ColorsViewProvider implements vscode.WebviewViewProvider {
@@ -89,9 +99,8 @@ class ColorsViewProvider implements vscode.WebviewViewProvider {
 		});
 	}
 
-	public loadDiff(uri: vscode.Uri) {
+	public loadDiff(uri: vscode.Uri, expandAll: boolean = false) {
 		const repo = this.git?.getRepository(uri);
-		const promise = repo?.diffWithHEAD(uri.path);
 		this.file = uri;
 		if (!this._view) {
 			return;
@@ -101,8 +110,13 @@ class ColorsViewProvider implements vscode.WebviewViewProvider {
 			workspaceFolder = workspaceFolder.substring(0, workspaceFolder.lastIndexOf('/')+1);
 			this._view.title = uri.path.replace(workspaceFolder, "");
 		}
+		
+		let option = "";
+		if (expandAll) {
+			option = "-U$(wc -l "+uri.path+" | cut -d' ' -f1)";
+		}
+		const promise = executeCommand("git -C "+repo.rootUri.path+" diff HEAD "+option+" " + uri.path);
 		promise?.then(diff => {
-				// TODO gérer lignes avant après : git diff -U$(wc -l MYFILE)
 				// TODO Faire viewsContainers : https://code.visualstudio.com/api/references/contribution-points#contributes.viewsContainers avec liste fichier cliquables
 				if (!diff) {
 					executeCommand("git diff -- /dev/null " + uri.path)
@@ -114,10 +128,14 @@ class ColorsViewProvider implements vscode.WebviewViewProvider {
 	}
 
 	public hideLeftSide() {
-		if (this._view) {
-			this._view.show?.(true); // `show` is not implemented in 1.49 but is for 1.50 insiders
-			this._view.webview.postMessage({ type: 'hideLeftSide' });
-		}
+		this._view.show?.(true); // `show` is not implemented in 1.49 but is for 1.50 insiders
+		this._view?.webview.postMessage({ type: 'hideLeftSide' });
+	}
+	public expandAll() {
+		this.loadDiff(this.file, true)
+	}
+	public collapseAll() {
+		this.loadDiff(this.file)
 	}
 
 	public _getHtmlForWebview(webview: vscode.Webview) {
@@ -172,9 +190,10 @@ class ColorsViewProvider implements vscode.WebviewViewProvider {
 function executeCommand(cmd: string): Promise<string> {
 	return new Promise<string>((resolve, reject) => {
 		cp.exec(cmd, (err, out, stderr) => {
-			/*if (err) {
+			if (stderr) {
+				console.log(stderr);
 				return reject(err);
-			}*/
+			}
 			return resolve(out);
 		});
 	});

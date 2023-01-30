@@ -50,13 +50,33 @@
 				"command": "diffViewerPanel.hideLeftSide",
 				"category": "Diff panel",
 				"title": "Hide left side",
-				"icon": "$(clear-all)"
+				"icon": "$(layout-sidebar-left)"
+			},
+			{
+				"command": "diffViewerPanel.expandAll",
+				"category": "Diff panel",
+				"title": "Expand all file",
+				"icon": "$(expand-all)"
+			},
+			{
+				"command": "diffViewerPanel.collapseAll",
+				"category": "Diff panel",
+				"title": "Collapse all file",
+				"icon": "$(collapse-all)"
 			}
 		],
 		"menus": {
 			"view/title": [
 				{
 					"command": "diffViewerPanel.hideLeftSide",
+					"group": "navigation"
+				},
+				{
+					"command": "diffViewerPanel.expandAll",
+					"group": "navigation"
+				},
+				{
+					"command": "diffViewerPanel.collapseAll",
 					"group": "navigation"
 				}
 			]
